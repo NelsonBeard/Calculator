@@ -4,21 +4,25 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import static com.geekbrains.calculator.Operations.provideOperation;
+import static com.geekbrains.calculator.Operations.result;
+import static com.geekbrains.calculator.Operations.updateTextViewResult;
+
 public class MainActivity extends AppCompatActivity {
-    TextView textViewResult;
-    Double firstOperand;
-    Double secondOperand;
-    Double result;
-    String operation;
+
+
+    public static final String OPERATION = "OPERATION";
+    Operations operation = new Operations();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textViewResult = findViewById(R.id.textViewResult);
+        Operations.textViewResult = findViewById(R.id.textViewResult);
 
         Button button1 = findViewById(R.id.button1);
         button1.setOnClickListener(v -> updateTextViewResult(button1));
@@ -63,47 +67,22 @@ public class MainActivity extends AppCompatActivity {
         buttonDivision.setOnClickListener(v -> provideOperation(buttonDivision));
 
         Button buttonEquals = findViewById(R.id.buttonEquals);
-        buttonEquals.setOnClickListener(v -> provideCount());
+        buttonEquals.setOnClickListener(v -> Operations.provideCount());
 
         Button buttonClear = findViewById(R.id.buttonClear);
-        buttonClear.setOnClickListener(v -> clearTextViewResult());
+        buttonClear.setOnClickListener(v -> Operations.clearTextViewResult());
     }
 
-    private void updateTextViewResult(Button button) {
-        textViewResult.append(button.getText().toString());
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(OPERATION,operation);
     }
 
-    private void provideOperation(Button button) {
-        operation = String.valueOf(button.getText());
-        firstOperand = Double.valueOf(textViewResult.getText().toString());
-        textViewResult.setText(null);
-    }
-
-    private void provideCount() {
-        secondOperand = Double.valueOf(textViewResult.getText().toString());
-        switch (operation) {
-            case "+":
-                result = firstOperand + secondOperand;
-                break;
-            case "-":
-                result = firstOperand - secondOperand;
-                break;
-            case "*":
-                result = firstOperand * secondOperand;
-                break;
-            case "/":
-                if (secondOperand != 0) {
-                    result = firstOperand / secondOperand;
-                }
-                break;
-        }
-        textViewResult.setText(String.valueOf(result));
-    }
-
-    private void clearTextViewResult() {
-        textViewResult.setText(null);
-        firstOperand = null;
-        secondOperand = null;
-        result = null;
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        operation = savedInstanceState.getParcelable(OPERATION);
+        Operations.textViewResult.setText(String.valueOf(result));
     }
 }
