@@ -2,7 +2,6 @@ package com.geekbrains.calculator;
 
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,9 +12,15 @@ import static com.geekbrains.calculator.Operations.updateTextViewResult;
 
 public class MainActivity extends AppCompatActivity {
 
-
     public static final String OPERATION = "OPERATION";
     Operations operation = new Operations();
+
+    private final int[] numberButtonIds = new int[]{R.id.button0, R.id.button1,
+            R.id.button2, R.id.button3, R.id.button4, R.id.button5,
+            R.id.button6, R.id.button7, R.id.button8, R.id.button9};
+
+    private final int[] operationButtonIds = new int[]{R.id.buttonPlus, R.id.buttonMinus,
+            R.id.buttonMultiply, R.id.buttonDivision};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,47 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
         Operations.textViewResult = findViewById(R.id.textViewResult);
 
-        Button button1 = findViewById(R.id.button1);
-        button1.setOnClickListener(v -> updateTextViewResult(button1));
-
-        Button button2 = findViewById(R.id.button2);
-        button2.setOnClickListener(v -> updateTextViewResult(button2));
-
-        Button button3 = findViewById(R.id.button3);
-        button3.setOnClickListener(v -> updateTextViewResult(button3));
-
-        Button button4 = findViewById(R.id.button4);
-        button4.setOnClickListener(v -> updateTextViewResult(button4));
-
-        Button button5 = findViewById(R.id.button5);
-        button5.setOnClickListener(v -> updateTextViewResult(button5));
-
-        Button button6 = findViewById(R.id.button6);
-        button6.setOnClickListener(v -> updateTextViewResult(button6));
-
-        Button button7 = findViewById(R.id.button7);
-        button7.setOnClickListener(v -> updateTextViewResult(button7));
-
-        Button button8 = findViewById(R.id.button8);
-        button8.setOnClickListener(v -> updateTextViewResult(button8));
-
-        Button button9 = findViewById(R.id.button9);
-        button9.setOnClickListener(v -> updateTextViewResult(button9));
-
-        Button button0 = findViewById(R.id.button0);
-        button0.setOnClickListener(v -> updateTextViewResult(button0));
-
-        Button buttonPlus = findViewById(R.id.buttonPlus);
-        buttonPlus.setOnClickListener(v -> provideOperation(buttonPlus));
-
-        Button buttonMinus = findViewById(R.id.buttonMinus);
-        buttonMinus.setOnClickListener(v -> provideOperation(buttonMinus));
-
-        Button buttonMultiply = findViewById(R.id.buttonMultiply);
-        buttonMultiply.setOnClickListener(v -> provideOperation(buttonMultiply));
-
-        Button buttonDivision = findViewById(R.id.buttonDivision);
-        buttonDivision.setOnClickListener(v -> provideOperation(buttonDivision));
+        setNumberButtonListeners();
+        setOperationButtonListeners();
 
         Button buttonEquals = findViewById(R.id.buttonEquals);
         buttonEquals.setOnClickListener(v -> Operations.provideCount());
@@ -73,10 +39,24 @@ public class MainActivity extends AppCompatActivity {
         buttonClear.setOnClickListener(v -> Operations.clearTextViewResult());
     }
 
+    private void setNumberButtonListeners() {
+        for (int i = 0; i < numberButtonIds.length; i++) {
+            Button btn = findViewById(numberButtonIds[i]);
+            btn.setOnClickListener(v -> updateTextViewResult(btn));
+        }
+    }
+
+    private void setOperationButtonListeners() {
+        for (int i = 0; i < operationButtonIds.length; i++) {
+            Button btn = findViewById(operationButtonIds[i]);
+            btn.setOnClickListener(v -> provideOperation(btn));
+        }
+    }
+
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable(OPERATION,operation);
+        outState.putSerializable(OPERATION, operation);
     }
 
     @Override
