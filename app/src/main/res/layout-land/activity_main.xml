@@ -6,14 +6,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity"
-    android:background="@drawable/calc_theme">
+    android:background="@drawable/calc_theme"
+    tools:ignore="MissingDefaultResource">
 
     <TextView
         android:id="@+id/textViewResult"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:textSize="30dp"
-        android:textColor="@color/white" />
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="30dp" />
 
     <TableRow
         android:layout_width="match_parent"
