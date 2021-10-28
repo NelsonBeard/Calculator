@@ -29,7 +29,7 @@ public class Operations implements Serializable {
 
 
     static void provideCount() {
-        if ((textViewResult.getText().toString().length() > 0) && (textViewResult.getText().toString() != null)) {
+        if ((textViewResult.getText().toString().length() > 0) && (textViewResult.getText().toString() != null)&&(firstOperand!=null)) {
             secondOperand = Double.valueOf(textViewResult.getText().toString());
 
             switch (operation) {
