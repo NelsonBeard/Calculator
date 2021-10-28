@@ -4,7 +4,7 @@
     <dimen name="result_line_margin">20dp</dimen>
 
     <dimen name="button_margin">2dp</dimen>
-    <dimen name="button_text_size">15sp</dimen>
+    <dimen name="button_text_size">10sp</dimen>
     <dimen name="button_corner_radius">20dp</dimen>
     <dimen name="table_row_margin">20dp</dimen>
 </resources>

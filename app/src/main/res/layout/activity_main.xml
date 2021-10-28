@@ -5,15 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity"
-    android:background="@drawable/calc_theme">
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/textViewResult"
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:textSize="@dimen/result_line_text_size"
-        android:textColor="@color/white"
         android:layout_margin="@dimen/result_line_margin"
         android:layout_weight="1"/>
 
