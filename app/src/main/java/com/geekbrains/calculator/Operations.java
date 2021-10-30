@@ -1,9 +1,10 @@
 package com.geekbrains.calculator;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.content.res.Configuration;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatDelegate;
 
 import java.io.Serializable;
 
@@ -29,7 +30,7 @@ public class Operations implements Serializable {
 
 
     static void provideCount() {
-        if ((textViewResult.getText().toString().length() > 0) && (textViewResult.getText().toString() != null)) {
+        if ((textViewResult.getText().toString().length() > 0) && (textViewResult.getText().toString() != null)&&(firstOperand!=null)) {
             secondOperand = Double.valueOf(textViewResult.getText().toString());
 
             switch (operation) {
@@ -59,6 +60,19 @@ public class Operations implements Serializable {
         firstOperand = null;
         secondOperand = null;
         result = null;
+
+    }
+
+    static boolean changeTheme() {
+        switch (MainActivity.currentTheme) {
+            case Configuration.UI_MODE_NIGHT_NO:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                break;
+            case Configuration.UI_MODE_NIGHT_YES:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                break;
+        }
+        return true;
     }
 
 }
