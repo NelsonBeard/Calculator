@@ -1,5 +1,6 @@
 package com.geekbrains.calculator;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.widget.Button;
 import android.widget.TextView;
@@ -61,18 +62,6 @@ public class Operations implements Serializable {
         secondOperand = null;
         result = null;
 
-    }
-
-    static boolean changeTheme() {
-        switch (MainActivity.currentTheme) {
-            case Configuration.UI_MODE_NIGHT_NO:
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                break;
-            case Configuration.UI_MODE_NIGHT_YES:
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                break;
-        }
-        return true;
     }
 
 }

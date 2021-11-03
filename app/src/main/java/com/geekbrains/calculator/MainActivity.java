@@ -1,5 +1,6 @@
 package com.geekbrains.calculator;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.Button;
@@ -14,7 +15,6 @@ import static com.geekbrains.calculator.Operations.updateTextViewResult;
 public class MainActivity extends AppCompatActivity {
 
     public static final String OPERATION = "OPERATION";
-    public static int currentTheme;
     Operations operation = new Operations();
 
     private final int[] numberButtonIds = new int[]{R.id.button0, R.id.button1,
@@ -29,9 +29,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        currentTheme = getResources().getConfiguration().uiMode
-                & Configuration.UI_MODE_NIGHT_MASK;
-
         Operations.textViewResult = findViewById(R.id.textViewResult);
 
         setNumberButtonListeners();
@@ -42,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button buttonClear = findViewById(R.id.buttonClear);
         buttonClear.setOnClickListener(v -> Operations.clearTextViewResult());
-        buttonClear.setOnLongClickListener(v -> Operations.changeTheme());
+        buttonClear.setOnLongClickListener(v ->openSettingsActivity());
     }
 
     private void setNumberButtonListeners() {
@@ -57,6 +54,12 @@ public class MainActivity extends AppCompatActivity {
             Button btn = findViewById(operationButtonIds[i]);
             btn.setOnClickListener(v -> provideOperation(btn));
         }
+    }
+
+    public boolean openSettingsActivity() {
+        Intent openSettings = new Intent(MainActivity.this, SettingsActivity.class);
+        startActivity(openSettings);
+        return true;
     }
 
     @Override
